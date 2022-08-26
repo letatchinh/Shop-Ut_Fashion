@@ -1,0 +1,7 @@
+export const CHANGE_USERNAME = "CHANGE_USERNAME"
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
+export const CHECK_LOGIN= "CHECK_LOGIN"
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"
+export const FETCH_USER = "FETCH_USER"
+export const IS_STATUS_LOGIN = "IS_STATUS_LOGIN"

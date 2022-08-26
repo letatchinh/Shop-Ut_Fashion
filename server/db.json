@@ -1,0 +1,97 @@
+{
+  "listProduct": [
+    {
+      "id": 1,
+      "name": "abc",
+      "price": 123,
+      "isSell": true,
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg"
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 2
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 3
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 4
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 5
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 6
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 7
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 8
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 9
+    },
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 10
+    },
+    {
+      "name": "",
+      "price": 0,
+      "image": "",
+      "isSell": false,
+      "id": 11
+    }
+  ],
+  "users": [
+    {
+      "username": "chinh",
+      "password": "123123",
+      "id": 1
+    }
+  ],
+  "listCarts": [
+    {
+      "name": "style",
+      "price": "20",
+      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+      "isSell": false,
+      "id": 4
+    }
+  ]
+}

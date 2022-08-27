@@ -43,6 +43,7 @@ export const DeleteCartRequest = (item) => {
         })()
     }
     }
+
 export const addCart = (item) => {
     return {
         type : TYPES.ADD_CART,
@@ -52,6 +53,41 @@ export const addCart = (item) => {
 export const deleteCart = (item) => {
     return {
         type : TYPES.DELETE_CART,
+        payload : item
+    }
+}
+export const increaseItemCartRequest = (item,id) => {
+    return (dispatch) =>
+(async () => {
+    try {
+      const res =  await CartApi.editCart(item,id)
+        console.log(res.data);
+        dispatch(increasement(item))
+    } catch (error) {
+        console.log(error);
+    }
+})()
+}
+export const decreaseItemCartRequest = (item,id) => {
+    return (dispatch) =>
+(async () => {
+    try {
+        await CartApi.editCart(item,id)
+        dispatch(decreasement(item))
+    } catch (error) {
+        console.log(error);
+    }
+})()
+}
+export const increasement = (item) => {
+    return {
+        type : TYPES.INCREASE_ITEM_CART,
+        payload : item
+    }
+}
+export const decreasement = (item) => {
+    return {
+        type : TYPES.DECREASE_ITEM_CART,
         payload : item
     }
 }

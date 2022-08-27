@@ -82,16 +82,18 @@
     {
       "username": "chinh",
       "password": "123123",
-      "id": 1
-    }
-  ],
-  "listCarts": [
-    {
-      "name": "style",
-      "price": "20",
-      "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
-      "isSell": false,
-      "id": 4
+      "id": 1 ,
+      "listCarts": [
+        {
+          "name": "style",
+          "price": "20",
+          "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+          "isSell": false,
+          "id": 3,
+          "quanlity": 2
+        }
+      ]
     }
   ]
+ 
 }

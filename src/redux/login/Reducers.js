@@ -9,6 +9,7 @@ const initvalue = {
     username: "",
     password: "",
     id: "",
+    listCarts : {}
   },
   statusLogin: false,
 };
@@ -18,7 +19,12 @@ const userReducer = (state = initvalue, action) => {
       return {
         ...state,
         user: action.payload,
-      };
+      }
+      case TYPES.FETCH_LOGINSUCCESS:
+        return {
+          ...state,
+          loginSuccess: action.payload,
+        }
     case TYPES.CHANGE_USERNAME:
       return {
         ...state,

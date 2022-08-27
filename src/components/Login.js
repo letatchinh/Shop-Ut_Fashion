@@ -15,7 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [display, setDisplay] = useState(false);
+  const [reRender, setReRender] = useState(false);
   const users = useSelector((state) => state.user.textLogin);
+  const loginSuccess = useSelector((state) => state.user.loginSuccess);
   const statusLogin = useSelector((state) => state.user.statusLogin);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -24,15 +26,16 @@ export default function Login() {
   useEffect(() => {
     if(statusLogin){
       navigate('/product')
-      localStorage.setItem('user',JSON.stringify(users))
+      localStorage.setItem('user',JSON.stringify(loginSuccess))
     }
-  },[statusLogin])
+  },[reRender])
 const navigate = useNavigate();
   const clickAddProduct = async (e) => {
     e.preventDefault();
     await dispatch(fetchCheckLogin(users));
     dispatch(fectchLogin(users));
     setDisplay(true);
+    setReRender(!reRender)
   };
 
   return (

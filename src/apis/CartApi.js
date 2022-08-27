@@ -13,5 +13,9 @@ const CartApi = {
     const res = await axiosClient.delete(`/listCarts/${item}`);
     return res;
   },
+  async editCart(item,id) {
+    const res = await axiosClient.put(`/listCarts/${id}`,item);
+    return res;
+  },
 };
 export default CartApi;

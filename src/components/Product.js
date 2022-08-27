@@ -12,7 +12,7 @@ export default function Product(props) {
   const {name , image , price , isSell , item} = props
   const dispatch = useDispatch()
   const handleAddCart = () => {
-    dispatch(addCartRequest(item))
+    dispatch(addCartRequest({...item,quanlity : 1}))
   }
   return (
     <Card sx={{display : "flex" , flexDirection : "column" , alignItems : "center" ,position : "relative"}}>

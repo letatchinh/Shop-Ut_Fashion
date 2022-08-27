@@ -36,9 +36,27 @@ export const fecthUserRequest = () => {
         })()
     }
 }
+export const fetchLogginSuccessRequest = () => {
+    return (dispatch) => {
+        ( () => {
+            try {
+                const res = JSON.parse(localStorage.getItem('user'))
+                dispatch(fecthLogginSuccess(res))
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    }
+}
 export const fecthUser = (user) => {
     return {
         type : TYPES.FETCH_USER ,
+        payload : user
+    }
+}
+export const fecthLogginSuccess= (user) => {
+    return {
+        type : TYPES.FETCH_LOGINSUCCESS ,
         payload : user
     }
 }

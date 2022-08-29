@@ -1,7 +1,7 @@
 import axios from "axios"
-
+import {URL_BASE} from '../constant/UrlConstant'
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:8000/',
+    baseURL: URL_BASE,
    headers : {
        'content-type' : 'application/json'
    },

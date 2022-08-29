@@ -12,10 +12,13 @@ import { fectchLogout } from "../../redux/login/Actions";
 import { IS_STATUS_LOGIN } from "../../redux/login/Types";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Cart from "../../components/Cart";
+import { search, setSearch } from "../../redux/shopping/Shopping-actions";
 export default function Index() {
-  const [user,setUser] = useState([])
+  const [user,setUser] = useState({})
+  const [displayCart,setDisplayCart] = useState(false)
   const statusLogin = useSelector(state => state.user.statusLogin);
-  const listCart = useSelector(state => state.cart.listCart);
+  const loginSuccess = useSelector(state => state.user.loginSuccess)
+  const searchKeyword = useSelector(state => state.shop.searchKeyword)
   const dispatch = useDispatch()
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -31,8 +34,6 @@ export default function Index() {
     setUser(item)
     dispatch({type : IS_STATUS_LOGIN ,dispatch : ""})
   }
-
- 
   },[localStorage.getItem('user')])
   const handleClose = () => {
     setAnchorEl(null);
@@ -43,6 +44,12 @@ export default function Index() {
     localStorage.removeItem('user')
     navigate('/product/')
     
+  }
+  const changeInputSearch = (e) => {
+    dispatch(search(e.target.value))
+  }
+  const setInputSearch = () => {
+    dispatch(setSearch(searchKeyword))
   }
   return (
     <Container  sx={{ flexGrow: 1 }}>
@@ -59,8 +66,8 @@ export default function Index() {
         <Grid item xs={6}>
           {" "}
           <div style={{ display: "flex", alignItems: "center" }}>
-            <TextField fullWidth id="outlined-basic" label="Search" variant="outlined" />
-            <Button variant="outlined" startIcon={<SearchIcon />}>Search</Button>
+            <TextField onChange={changeInputSearch} value={searchKeyword} fullWidth label="Search" variant="outlined" />
+            <Link to='search/'><Button onClick={setInputSearch} variant="outlined" startIcon={<SearchIcon />}>Search</Button></Link>
           </div>
         </Grid>
         <Grid sx={{display : "flex" , alignItems : "center"}} item xs={1}>
@@ -98,9 +105,9 @@ export default function Index() {
         
         </div>
       </Menu>
-      <Badge sx={{position : "relative"}} color="secondary" badgeContent={listCart.length}>
-        <ShoppingBagOutlinedIcon onClick={() => console.log("ok")} fontSize="large" sx={{ cursor :"pointer"}}/>
-        <Cart />
+      <Badge sx={{position : "relative"}} color="secondary" badgeContent={loginSuccess.listCarts.length}>
+        <ShoppingBagOutlinedIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
+        <Cart display={displayCart}/>
       </Badge>
         </Grid>
       </Grid>

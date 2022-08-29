@@ -24,6 +24,18 @@ export const addProduct = (type , payload) => {
         payload : payload
     }
 }
+export const search = (payload) => {
+    return {
+        type : TYPES.CHANGE_SEARCH_KEYWORD ,
+        payload : payload
+    }
+}
+export const setSearch = (payload) => {
+    return {
+        type : TYPES.SET_SEARCH_KEYWORD ,
+        payload : payload
+    }
+}
 export const fetchAddProductRequest = (item) => {
     return (dispatch) => {
         (async () => {

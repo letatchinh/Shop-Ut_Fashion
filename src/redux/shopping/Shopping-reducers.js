@@ -7,6 +7,8 @@ const initvalue = {
     image: "",
     isSell: false,
   },
+  searchKeyword : "",
+  setSearchKeyword : ""
 };
 const shopReducer = (state = initvalue, action) => {
   switch (action.type) {
@@ -19,6 +21,16 @@ const shopReducer = (state = initvalue, action) => {
       return {
         ...state,
         newProduct: { ...state.newProduct, name: action.payload }
+      }
+    case TYPES.CHANGE_SEARCH_KEYWORD:
+      return {
+        ...state,
+        searchKeyword: action.payload
+      }
+    case TYPES.SET_SEARCH_KEYWORD:
+      return {
+        ...state,
+        setSearchKeyword: action.payload
       }
     case TYPES.CHANGE_PRICE:
       return {

@@ -14,7 +14,7 @@ export const userApi = {
     return res;
   },
   async editUser(user, id) {
-    const res = await axiosClient.post(`users/${id}`, user);
-    return res;
+    await axiosClient.put(`users/${id}`, user);
+    
   },
 };

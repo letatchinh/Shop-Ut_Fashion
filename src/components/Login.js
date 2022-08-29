@@ -51,7 +51,7 @@ const navigate = useNavigate();
               dispatch(changeText(TYPES.CHANGE_USERNAME, e.target.value))
             }
             fullWidth
-            id="outlined-basic"
+            autoComplete="on"
             label="User Name"
             variant="outlined"
           />
@@ -62,7 +62,7 @@ const navigate = useNavigate();
             }
             type={"password"}
             fullWidth
-            id="outlined-basic"
+            autoComplete="on"
             label="Password"
             variant="outlined"
           />

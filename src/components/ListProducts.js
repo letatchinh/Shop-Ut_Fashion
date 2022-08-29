@@ -10,7 +10,7 @@ export default function ListProducts() {
     const listProduct = useSelector((state) => state.shop.listProduct)
     useEffect(() => {
         dispatch(fecthProductRequest())
-    },[dispatch])
+    },[])
   return (
    <Container >
        <Grid container spacing={3} >

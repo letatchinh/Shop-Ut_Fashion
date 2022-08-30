@@ -22,6 +22,11 @@ const userReducer = (state = initvalue, action) => {
         ...state,
         user: action.payload,
       };
+      case TYPES.REGISTER:
+        return {
+          ...state , 
+          user : [...state.user ,action.payload]
+        }
     case TYPES.FETCH_LOGINSUCCESS:
       return {
         ...state,

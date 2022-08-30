@@ -160,3 +160,21 @@ export const fecthUser = (user) => {
         payload : user
     }
 }
+export const fetchRegisterRequest = (user) => {
+    return (dispatch)=>{
+        (async ()=>{
+            try {   
+                await userApi.addUser(user)
+                dispatch(fetchRegister(user))
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    }
+}
+export const fetchRegister = (user) => {
+    return {
+        type : TYPES.REGISTER,
+        payload : user
+    }
+}

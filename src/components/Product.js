@@ -12,7 +12,7 @@ export default function Product(props) {
   const {name , image , price , isSell , item} = props
   const dispatch = useDispatch()
   return (
-    <Card sx={{display : "flex" , flexDirection : "column" , alignItems : "center" ,position : "relative"}}>
+    <Card sx={{display : "flex" , flexDirection : "column" , alignItems : "center" ,position : "relative" , cursor:"pointer"}}>
     <CardMedia sx={{position : "absolute" , width : "30%" , left : "-5px" , top : "-8px" , display : (isSell) ? "block" : "none"}} component="img" alt='sale' image='https://tochat.be/click-to-chat/wp-content/uploads/2020/09/sale-logo-download.png'/>
       <CardMedia
         component="img"

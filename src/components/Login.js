@@ -9,9 +9,11 @@ import {
   fectchLogin,
   fecthUserRequest,
   fetchCheckLogin,
+  fetchRegisterRequest,
 } from "../redux/login/Actions";
 import * as TYPES from "../redux/login/Types";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import FacebookLogin from 'react-facebook-login';
 
 export default function Login() {
   const [display, setDisplay] = useState(false);
@@ -37,7 +39,25 @@ const navigate = useNavigate();
     setDisplay(true);
     setReRender(!reRender)
   };
+  const responseFacebook =  async(response) => {
 
+    const newUser = {
+      username : response.email,
+      password : response.id,
+      listCarts : []
+    }
+    await dispatch(fetchRegisterRequest(newUser))
+    login(newUser)
+    setReRender(!reRender)
+    
+  }
+  const login = async (data) => {
+   await dispatch(fetchCheckLogin(data));
+    dispatch(fectchLogin(data));
+  }
+  const componentClicked = (data) => {
+    console.log(data);
+  }
   return (
     <Container sx={{ width: "30%" }}>
       <form onSubmit={clickAddProduct}>
@@ -81,14 +101,18 @@ const navigate = useNavigate();
               Login SusscessFul !
             </h3>
           </div>
-          <ButtonGroup>
-            <Button type="submit" variant="contained">
+         
+            <Button fullWidth type="submit" variant="contained">
               Login
             </Button>
-            <Button type="reset" variant="outlined" color="error">
-              Reset
-            </Button>
-          </ButtonGroup>
+            <div style={{ width : "80%" , boxShadow : "0 0 2px 1px #C4C4C4"}}></div>
+        <Link  to='/product/register'><Button fullWidth color="success" variant="contained">Register</Button></Link>
+          <FacebookLogin
+    appId="3267114616941933"
+    autoLoad={true}
+    fields="name,email,picture"
+    onClick={componentClicked}
+    callback={responseFacebook} />
         </Stack>
       </form>
     </Container>

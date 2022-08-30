@@ -6,6 +6,7 @@ import ListProducts from './components/ListProducts';
 import CreateProduct from './components/CreateProduct';
 import Login from './components/Login';
 import Search from './components/Search';
+import Register from './components/Register';
 function App() {
   return (
    <>
@@ -15,6 +16,7 @@ function App() {
        <Route path='/search' element={<Search />}/>
        <Route path='/product/new' element={<CreateProduct />}/>
        <Route path='/product/login' element={<Login />}/>
+       <Route path='/product/register' element={<Register />}/>
      </Routes>
    </>
   );

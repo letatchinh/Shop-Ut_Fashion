@@ -53,8 +53,6 @@ export default function Index() {
   }
   return (
     <Container  sx={{ flexGrow: 1 }}>
-          <Alert severity="warning">This is a warning alert — check it out!</Alert>
-
       <Grid container columnSpacing={4} justifyContent={"space-between"} alignItems={"center"}>
         <Grid item xs={2}>
          <Link to='/product/'><img

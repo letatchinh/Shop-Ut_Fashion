@@ -100,7 +100,6 @@ const userReducer = (state = initvalue, action) => {
           e.username === action.payload.username &&
           e.password === action.payload.password
       );
-
       return {
         ...state,
         statusLogin: accLogin.length > 0,

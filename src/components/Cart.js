@@ -30,14 +30,12 @@ font-size : 18px
   const dispatch = useDispatch();
   const cartUser = useSelector((state) => state.user.loginSuccess.listCarts);
   const totalBill = useSelector((state) => state.user.totalBill);
-  // console.log(totalBill);
   const fetch = useCallback(() => {
     if (localStorage.getItem("user")) {
       dispatch(fetchLogginSuccessRequest());
       
     }
     dispatch(calTotalBill(cartUser))
-    console.log("RERENDER CART");
   }, [localStorage.getItem("user")]);
   useEffect(() => {
     fetch();

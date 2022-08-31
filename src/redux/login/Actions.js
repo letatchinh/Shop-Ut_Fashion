@@ -1,5 +1,7 @@
+
 import { userApi } from '../../apis/usersApi'
 import * as TYPES from './Types'
+
 export const changeText = (type,payload) => {
     return {
         type : type ,
@@ -162,9 +164,9 @@ export const fecthUser = (user) => {
 }
 export const fetchRegisterRequest = (user) => {
     return (dispatch)=>{
-        (async ()=>{
+        (()=>{
             try {   
-                await userApi.addUser(user)
+                 userApi.addUser(user)
                 dispatch(fetchRegister(user))
             } catch (error) {
                 console.log(error);

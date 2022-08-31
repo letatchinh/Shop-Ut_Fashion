@@ -13,54 +13,85 @@ import {
 } from "../redux/login/Actions";
 import * as TYPES from "../redux/login/Types";
 import { Link, useNavigate } from "react-router-dom";
-import FacebookLogin from 'react-facebook-login';
+import FacebookLogin from "react-facebook-login";
+import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
 
 export default function Login() {
   const [display, setDisplay] = useState(false);
   const [reRender, setReRender] = useState(false);
   const users = useSelector((state) => state.user.textLogin);
+  const user = useSelector((state) => state.user.user);
   const loginSuccess = useSelector((state) => state.user.loginSuccess);
   const statusLogin = useSelector((state) => state.user.statusLogin);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fecthUserRequest());
-  }, [dispatch]);
-  useEffect(() => {
-    if(statusLogin){
-      navigate('/product')
-      localStorage.setItem('user',JSON.stringify(loginSuccess))
+    function start() {
+      gapi.client.init({
+        clientId:
+          "102456725904-0gb4rrpp4337idg21co7gar7a72mk5ll.apps.googleusercontent.com",
+        scope: "",
+      });
     }
-  },[reRender])
-const navigate = useNavigate();
-  const clickAddProduct = async (e) => {
+    gapi.load("client:auth2", start);
+  }, []);
+  useEffect(() => {
+    if (statusLogin) {
+      navigate("/product");
+      localStorage.setItem("user", JSON.stringify(loginSuccess));
+    }
+  }, [reRender]);
+  const navigate = useNavigate();
+  const clickLogin = async (e) => {
     e.preventDefault();
     await dispatch(fetchCheckLogin(users));
     dispatch(fectchLogin(users));
     setDisplay(true);
-    setReRender(!reRender)
+    setReRender(!reRender);
   };
-  const responseFacebook =  async(response) => {
-
+  const responseFacebook = async (response) => {
     const newUser = {
-      username : response.email,
-      password : response.id,
-      listCarts : []
+      username: response.id,
+      password: response.id,
+      listCarts: [],
+    };
+    const flag = user.findIndex((e) => e.username === newUser.username);
+    if (flag === -1) {
+      // CHƯA CÓ TÀI KHOẢN
+      loginWithRegister(newUser);
+    } else {
+      loginWithoutRegister(newUser);
     }
-    await dispatch(fetchRegisterRequest(newUser))
-    login(newUser)
-    setReRender(!reRender)
-    
-  }
-  const login = async (data) => {
-   await dispatch(fetchCheckLogin(data));
+  };
+  const responseGoogle = async (response) => {
+    const newUser = {
+      username: response.profileObj.email,
+      password: response.profileObj.googleId,
+      listCarts: [],
+    };
+    const flag = user.findIndex((e) => e.username === newUser.username);
+    if (flag === -1) {
+      loginWithRegister(newUser);
+    } else {
+      loginWithoutRegister(newUser);
+    }
+  };
+
+  const loginWithRegister = async (data) => {
+    await dispatch(fetchRegisterRequest(data));
+    dispatch(fetchCheckLogin(data));
     dispatch(fectchLogin(data));
-  }
-  const componentClicked = (data) => {
-    console.log(data);
-  }
+    setReRender(!reRender);
+  };
+  const loginWithoutRegister = (data) => {
+    dispatch(fetchCheckLogin(data));
+    dispatch(fectchLogin(data));
+    setReRender(!reRender);
+  };
   return (
     <Container sx={{ width: "30%" }}>
-      <form onSubmit={clickAddProduct}>
+      <form onSubmit={clickLogin}>
         <Stack alignItems={"center"} spacing={2}>
           <Typography variant="h3" gutterBottom>
             Login
@@ -101,18 +132,29 @@ const navigate = useNavigate();
               Login SusscessFul !
             </h3>
           </div>
-         
-            <Button fullWidth type="submit" variant="contained">
-              Login
+
+          <Button fullWidth type="submit" variant="contained">
+            Login
+          </Button>
+          <div style={{ width: "80%", boxShadow: "0 0 2px 1px #C4C4C4" }}></div>
+          <Link to="/product/register">
+            <Button fullWidth color="success" variant="contained">
+              Register
             </Button>
-            <div style={{ width : "80%" , boxShadow : "0 0 2px 1px #C4C4C4"}}></div>
-        <Link  to='/product/register'><Button fullWidth color="success" variant="contained">Register</Button></Link>
+          </Link>
           <FacebookLogin
-    appId="3267114616941933"
-    autoLoad={true}
-    fields="name,email,picture"
-    onClick={componentClicked}
-    callback={responseFacebook} />
+            appId="3267114616941933"
+            fields="name,email,picture"
+            callback={responseFacebook}
+            icon="fa-facebook"
+          />
+          <GoogleLogin
+            clientId="102456725904-0gb4rrpp4337idg21co7gar7a72mk5ll.apps.googleusercontent.com"
+            buttonText="Login With Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </Stack>
       </form>
     </Container>

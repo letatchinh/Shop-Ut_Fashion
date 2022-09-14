@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import productApi from '../apis/productApi'
 import { Container } from '@mui/system'
 import PaginatedItems from './PaginatedItems'
-export default function Search({data}) {
+export default function Search() {
   const [listSearch,setListSearch] = useState([])
   const setInputSearch = useSelector(state => state.shop.setSearchKeyword)
   const fetchSearch = useCallback(async() => {

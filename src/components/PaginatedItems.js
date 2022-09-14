@@ -1,19 +1,10 @@
-import { Button, Grid } from '@mui/material';
-import axios from 'axios';
+import { Grid } from '@mui/material';
 import React, {  useEffect,  useState } from 'react';
-import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
-import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 import Product from './Product';
-let data = [];
-(async() => {
-  const res = await axios.get("http://localhost:8000/listProduct/")
-  data = res.data
-})()
+
 const PaginatedItems =({ itemsPerPage , listProduct })=> {
-  const list = useSelector(state => state.shop.listProduct)
-  console.log(list);
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);

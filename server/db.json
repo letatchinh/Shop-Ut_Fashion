@@ -256,7 +256,7 @@
           "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
           "isSell": false,
           "id": 0,
-          "quanlity": 4
+          "quanlity": 5
         },
         {
           "name": "style",
@@ -280,6 +280,22 @@
           "price": 123,
           "isSell": true,
           "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+          "quanlity": 1
+        },
+        {
+          "name": "style",
+          "price": "20",
+          "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+          "isSell": false,
+          "id": 4,
+          "quanlity": 1
+        },
+        {
+          "name": "style",
+          "price": "20",
+          "image": "https://top10tphcm.com/wp-content/uploads/2019/12/mau-ao-lop-dep-va-doc.jpg",
+          "isSell": false,
+          "id": 5,
           "quanlity": 1
         }
       ],

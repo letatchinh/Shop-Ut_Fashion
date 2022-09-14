@@ -10,9 +10,14 @@ import Register from './components/Register';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fecthProductRequest } from './redux/shopping/Shopping-actions';
-import productApi from './apis/productApi';
 function App() {
-
+  const dispatch = useDispatch();
+  const fetch = useCallback(async() => {
+    await dispatch(fecthProductRequest())
+  },[dispatch])
+  useEffect(() => {
+    fetch()
+  },[fetch]);
  
   return (
    <>

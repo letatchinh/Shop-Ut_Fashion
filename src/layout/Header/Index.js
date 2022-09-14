@@ -14,6 +14,10 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Cart from "../../components/Cart";
 import { search, setSearch } from "../../redux/shopping/Shopping-actions";
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import PinterestIcon from '@mui/icons-material/Pinterest';
 export default function Index() {
   const [user,setUser] = useState({})
   const [displayCart,setDisplayCart] = useState(false)
@@ -43,7 +47,7 @@ export default function Index() {
   const handleLogout = () => {
     dispatch(fectchLogout())
     localStorage.removeItem('user')
-    navigate('/product/')
+    navigate('/')
     
   }
   const changeInputSearch = (e) => {
@@ -53,12 +57,36 @@ export default function Index() {
     dispatch(setSearch(searchKeyword))
   }
   return (
+    <>
+ <Grid alignItems={"center"} justifyContent={"space-around"} container style={{background : "#F6F415", height : "50px"}}>
+ <Grid  item xs={4}>
+ <span>0905970965</span>
+ </Grid>
+ <Grid item xs={2}>
+   <Grid container spacing={5}>
+   <Grid item>
+   <FacebookIcon/>
+   </Grid>
+   <Grid item>
+   <InstagramIcon/>
+   </Grid>
+   <Grid item>
+   <YouTubeIcon/>
+   </Grid>
+   <Grid item>
+   <PinterestIcon/>
+   </Grid>
+   </Grid>
+ </Grid>
+ </Grid>
     <Container  sx={{ flexGrow: 1 }}>
+   
       <Grid container columnSpacing={4} justifyContent={"space-between"} alignItems={"center"}>
+      
         <Grid item xs={2}>
          <Link to='/'><img
             style={{ borderRadius: "50%", width: "100%" }}
-            src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn"            alt="logo"
+            src="https://img.freepik.com/free-vector/fashion-logo-editorial-template_23-2148701249.jpg?w=2000"            alt="logo"
           /></Link>
         </Grid>
         <Grid item xs={6}>
@@ -104,12 +132,13 @@ export default function Index() {
         </div>
       </Menu>
       <Badge sx={{position : "relative"}} color="secondary" badgeContent={loginSuccess.listCarts.length}>
-        <NotificationsIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
+        <ShoppingBagOutlinedIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
         <Cart display={displayCart}/>
       </Badge>
       
         </Grid>
       </Grid>
     </Container>
+    </>
   );
 }

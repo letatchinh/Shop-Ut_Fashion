@@ -38,7 +38,7 @@ export default function Login() {
   }, []);
   useEffect(() => {
     if (statusLogin) {
-      navigate("/product");
+      navigate("/");
       localStorage.setItem("user", JSON.stringify(loginSuccess));
     }
   }, [reRender]);

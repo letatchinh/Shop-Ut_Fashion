@@ -7,16 +7,22 @@ import CreateProduct from './components/CreateProduct';
 import Login from './components/Login';
 import Search from './components/Search';
 import Register from './components/Register';
+import { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fecthProductRequest } from './redux/shopping/Shopping-actions';
+import productApi from './apis/productApi';
 function App() {
+
+ 
   return (
    <>
      <Header />
      <Routes>
-       <Route path='/product' element={<ListProducts />}/>
+       <Route path='/' element={<ListProducts />}/>
        <Route path='/search' element={<Search />}/>
-       <Route path='/product/new' element={<CreateProduct />}/>
-       <Route path='/product/login' element={<Login />}/>
-       <Route path='/product/register' element={<Register />}/>
+       <Route path='/new' element={<CreateProduct />}/>
+       <Route path='/login' element={<Login />}/>
+       <Route path='/register' element={<Register />}/>
      </Routes>
    </>
   );

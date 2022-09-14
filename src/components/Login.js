@@ -137,7 +137,7 @@ export default function Login() {
             Login
           </Button>
           <div style={{ width: "80%", boxShadow: "0 0 2px 1px #C4C4C4" }}></div>
-          <Link to="/product/register">
+          <Link to="/register">
             <Button fullWidth color="success" variant="contained">
               Register
             </Button>

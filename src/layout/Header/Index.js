@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Container } from "@mui/system";
-import {  Alert, Badge, Grid, Menu, MenuItem } from "@mui/material";
+import {   Badge, Grid, Menu, MenuItem } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +13,7 @@ import { IS_STATUS_LOGIN } from "../../redux/login/Types";
 import LogoutIcon from '@mui/icons-material/Logout';
 import Cart from "../../components/Cart";
 import { search, setSearch } from "../../redux/shopping/Shopping-actions";
+import NotificationsIcon from '@mui/icons-material/Notifications';
 export default function Index() {
   const [user,setUser] = useState({})
   const [displayCart,setDisplayCart] = useState(false)
@@ -55,17 +56,16 @@ export default function Index() {
     <Container  sx={{ flexGrow: 1 }}>
       <Grid container columnSpacing={4} justifyContent={"space-between"} alignItems={"center"}>
         <Grid item xs={2}>
-         <Link to='/product/'><img
+         <Link to='/'><img
             style={{ borderRadius: "50%", width: "100%" }}
-            src="https://scontent.fdad3-5.fna.fbcdn.net/v/t39.30808-6/293970437_3390497011276543_2964876197617690666_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=w1wgcnNS2QMAX_bZskD&_nc_ht=scontent.fdad3-5.fna&oh=00_AT8C4aGA20FA0snMFiuPQdfym5VD5gmZpQFiA994PlZrOA&oe=630CBD3C"
-            alt="logo"
+            src="https://play-lh.googleusercontent.com/ahJtMe0vfOlAu1XJVQ6rcaGrQBgtrEZQefHy7SXB7jpijKhu1Kkox90XDuH8RmcBOXNn"            alt="logo"
           /></Link>
         </Grid>
         <Grid item xs={6}>
           {" "}
           <div style={{ display: "flex", alignItems: "center" }}>
             <TextField onChange={changeInputSearch} value={searchKeyword} fullWidth label="Search" variant="outlined" />
-            <Link to='search/'><Button onClick={setInputSearch} variant="outlined" startIcon={<SearchIcon />}>Search</Button></Link>
+            <Link to='/search'><Button onClick={setInputSearch} variant="outlined" startIcon={<SearchIcon />}>Search</Button></Link>
           </div>
         </Grid>
         <Grid sx={{display : "flex" , alignItems : "center"}} item xs={1}>
@@ -99,14 +99,15 @@ export default function Index() {
         <MenuItem  onClick={() => {handleLogout() ; handleClose()}}><LogoutIcon/>Logout</MenuItem>
         </div>
        <div style={{display : (!statusLogin) ? "block" : "none"}}> 
-       <Link to='product/login'> <MenuItem onClick={handleClose}>Login</MenuItem></Link>
+       <Link to='/login'> <MenuItem onClick={handleClose}>Login</MenuItem></Link>
         
         </div>
       </Menu>
       <Badge sx={{position : "relative"}} color="secondary" badgeContent={loginSuccess.listCarts.length}>
-        <ShoppingBagOutlinedIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
+        <NotificationsIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
         <Cart display={displayCart}/>
       </Badge>
+      
         </Grid>
       </Grid>
     </Container>

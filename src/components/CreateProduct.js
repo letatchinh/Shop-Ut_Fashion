@@ -1,21 +1,22 @@
 import { Button, FormControl, FormHelperText, InputAdornment,OutlinedInput,TextField } from '@mui/material'
 import { Box, Container, Stack } from '@mui/system'
-import React, { useState } from 'react'
+import React from 'react'
 import Typography from '@mui/material/Typography';
 import '@fontsource/roboto/300.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {  fetchAddProductRequest } from '../redux/shopping/Shopping-actions';
-import * as TYPES from '../redux/shopping/Shopping-types';
 import { useForm } from 'react-hook-form';
-
 export default function CreateProduct() {
   const { setValue, register, handleSubmit, watch, formState: {errors } } = useForm();
   const dispatch = useDispatch()
   const onSubmit = (data) => {
-    dispatch(fetchAddProductRequest({...data,rating : 0,listRating : []}))
+    let sellPrice = 0;
+    if(data.isSell === 'true'){
+       sellPrice = watch("price") - watch("price")*(watch("discount")/100)
+    }
+    dispatch(fetchAddProductRequest({...data,rating : 0,listRating : [],sellPrice : sellPrice}))
     alert("Add Thanh cong")
   };
-
   return (
     <Container sx={{width : "30%"}}>
      <form onSubmit={handleSubmit(onSubmit)}>
@@ -44,7 +45,7 @@ export default function CreateProduct() {
           sx={{display : (watch("isSell")==='true') ? "inline-flex" : "none"}}
           id="outlined-adornment-weight"
            type='number'
-          defaultValue={0}
+          defaultValue={1}
            {...register("discount",{min : 0 , max : 100})}
             endAdornment={<InputAdornment position="end">%</InputAdornment>}
             aria-describedby="outlined-weight-helper-text"

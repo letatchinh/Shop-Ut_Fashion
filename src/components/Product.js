@@ -14,9 +14,9 @@ export default function Product(props) {
   const {name , image , price , isSell , item ,rating , listRating} = props
   const dispatch = useDispatch()
   return (
-    <Card className='cardHover' sx={{display : "flex" , flexDirection : "column" , alignItems : "center" ,position : "relative" , cursor:"pointer" , height : '90%'}}>
-    <CardMedia sx={{position : "absolute" , width : "30%" , left : "-5px" , top : "-8px" , display : (isSell) ? "block" : "none"}} component="img" alt='sale' image='https://tochat.be/click-to-chat/wp-content/uploads/2020/09/sale-logo-download.png'/>
-      <CardMedia
+    <Card  sx={{display : "flex" , flexDirection : "column" , alignItems : "center" ,position : "relative" , cursor:"pointer",height : '90%' }}>
+    <CardMedia sx={{position : "absolute" , width : "30%" , left : "-5px" , top : "-8px" , display : (isSell === 'true') ? "block" : "none"}} component="img" alt='sale' image='https://tochat.be/click-to-chat/wp-content/uploads/2020/09/sale-logo-download.png'/>
+      <CardMedia sx={{height: '50%'}}
         component="img"
         alt="green iguana"
         image={image}
@@ -25,15 +25,14 @@ export default function Product(props) {
         <Typography  gutterBottom variant="h5" component="div">
           {name}
         </Typography>
-        <h3 style={{textDecoration : (isSell) ? "line-through" : "none" , color : (!isSell) ?  "orange" : "#C4C4C4"} }>
+        <h3 style={{textDecoration : (isSell === 'true') ? "line-through" : "none" , color : (isSell === 'false') ?  "orange" : "#C4C4C4" , fontSize : (isSell === 'false') ? '24px' : '12px'} }>
           {price} Đ
         </h3>
-        <h3 style={{opacity : (isSell) ? "1" : "0" ,  color : (isSell) ?  "orange" : "#C4C4C4"}}>
+        <h3 style={{opacity : (isSell === 'true') ? "1" : "0" ,  color : (isSell) ?  "orange" : "#C4C4C4"}}>
         {price * 9 / 10} Đ
         </h3>
       </CardContent>
-      <Rating name="read-only" value={rating} readOnly />
-
+      <Rating name="read-only" value={parseInt(rating)} readOnly />
  <Typography  gutterBottom variant="h6" component="span">
           ({listRating.length}) ReView
         </Typography>

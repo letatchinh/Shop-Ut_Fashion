@@ -15,10 +15,10 @@ function App() {
   const dispatch = useDispatch();
   const fetch = useCallback(async() => {
     await dispatch(fecthProductRequest())
-  },[dispatch])
+  },[])
   useEffect(() => {
     fetch()
-  },[fetch]);
+  },[]);
  const listProduct = useSelector(state => state.shop.listProduct)
   return (
    <>

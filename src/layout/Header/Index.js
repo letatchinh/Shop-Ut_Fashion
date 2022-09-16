@@ -133,6 +133,10 @@ export default function Index() {
         <ShoppingBagOutlinedIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
         <Cart display={displayCart}/>
       </Badge>
+      <Badge sx={{position : "relative"}} color="secondary" badgeContent={2}>
+        <NotificationsIcon onClick={() => setDisplayCart(!displayCart)} fontSize="large" sx={{ cursor :"pointer"}}/>
+        <Cart display={displayCart}/>
+      </Badge>
       
         </Grid>
       </Grid>

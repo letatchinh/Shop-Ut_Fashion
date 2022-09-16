@@ -1,6 +1,6 @@
 import { Button, FormControl, FormHelperText, InputAdornment,OutlinedInput,TextField } from '@mui/material'
 import { Box, Container, Stack } from '@mui/system'
-import React from 'react'
+import React, { useState } from 'react'
 import Typography from '@mui/material/Typography';
 import '@fontsource/roboto/300.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,19 +10,12 @@ import { useForm } from 'react-hook-form';
 
 export default function CreateProduct() {
   const { setValue, register, handleSubmit, watch, formState: {errors } } = useForm();
-  const onSubmit = data => {
-    dispatch(fetchAddProductRequest(data))
+  const dispatch = useDispatch()
+  const onSubmit = (data) => {
+    dispatch(fetchAddProductRequest({...data,rating : 0,listRating : []}))
     alert("Add Thanh cong")
   };
 
-  const newProduct = useSelector(state => state.shop.newProduct)
-  const dispatch = useDispatch()
-  const clickAddProduct = (e) => {
-    e.preventDefault();
-    dispatch(fetchAddProductRequest(newProduct))
-    alert("Add Thanh cong")
-    console.log(newProduct);
-  }
   return (
     <Container sx={{width : "30%"}}>
      <form onSubmit={handleSubmit(onSubmit)}>

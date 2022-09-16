@@ -46,6 +46,16 @@ const shopReducer = (state = initvalue, action) => {
         return {
           ...state , listProduct : [...state.listProduct , action.payload]
         }
+        case TYPES.ADD_RATING:
+          const newListproduct = state.listProduct.map(e => {
+            if(e.id === action.payload.id){
+              e = action.payload
+            }
+            return e
+          })
+          return{
+            ...state , listProduct : newListproduct
+          }
     default:
       return state;
   }

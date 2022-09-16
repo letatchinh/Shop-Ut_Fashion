@@ -54,3 +54,21 @@ export const fetchAddProduct = (product) => {
         payload : product
     }
 }
+export const fetchAddRatingProductRequest = (item,id) => {
+    return (dispatch) => {
+        (async ()=>{
+            try {
+                const res = await productApi.editItem(item,id)
+                dispatch(fecthProductAddRating(res.data))
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    }
+}
+export const fecthProductAddRating = (item) => {
+    return {
+        type : TYPES.ADD_RATING,
+        payload : item
+    }
+}

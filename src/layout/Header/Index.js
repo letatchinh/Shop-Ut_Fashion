@@ -80,9 +80,7 @@ export default function Index() {
  </Grid>
  </Grid>
     <Container  sx={{ flexGrow: 1 }}>
-   
       <Grid container columnSpacing={4} justifyContent={"space-between"} alignItems={"center"}>
-      
         <Grid item xs={2}>
          <Link to='/'><img
             style={{ borderRadius: "50%", width: "100%" }}

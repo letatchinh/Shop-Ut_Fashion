@@ -17,6 +17,9 @@ const productApi = {
         const res = await axiosClient.post(`listProduct/`,item)
         return res
     },
-
+    async editItem(item,id) {
+        const res = await axiosClient.put(`listProduct/${id}`,item)
+        return res
+    },
 }
 export default productApi

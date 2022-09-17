@@ -33,20 +33,20 @@ export default function Index() {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('user'))
+    if(localStorage.getItem('userShopUt'))
   {
-    const item = JSON.parse(localStorage.getItem('user'));
+    const item = JSON.parse(localStorage.getItem('userShopUt'));
     setUser(item)
     dispatch({type : IS_STATUS_LOGIN ,dispatch : ""})
   }
-  },[localStorage.getItem('user')])
+  },[localStorage.getItem('userShopUt')])
   const handleClose = () => {
     setAnchorEl(null);
 
   };
   const handleLogout = () => {
     dispatch(fectchLogout())
-    localStorage.removeItem('user')
+    localStorage.removeItem('userShopUt')
     navigate('/')
     
   }

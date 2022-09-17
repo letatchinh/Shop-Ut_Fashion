@@ -1,4 +1,4 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography } from "@mui/material";
 import { Container, Stack } from "@mui/system";
 import React, { useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Rating from "@mui/material/Rating";
 import ListReview from "./ListReview";
 import { fetchAddRatingProductRequest } from "../redux/shopping/Shopping-actions";
+import PriceSell from "./PriceSell";
 export default function DetailProduct(props) {
   const { name, image, price, isSell, item, rating, id, listRating } = props;
   const [value, setValue] = useState(null);
@@ -33,18 +34,19 @@ export default function DetailProduct(props) {
       fetchAddRatingProductRequest(
         {
           ...item,
-          listRating: [...item.listRating, { ...data, rating: value,time : newdate ,username:username}],
+          listRating: [...item.listRating, { ...data, rating: value,time : newdate ,username:username , id : listRating.length + 1}],
           rating: newRating,
         },
         id
       )
-    );
+    )
+
   };
   return (
     <Container>
       <Stack justifyContent="space-between" direction="row" spacing={5}>
         <img style={{ width: "50%" }} src={image} alt="name" />
-        <Stack width="50%" spacing={2}>
+        <Stack width="70%" spacing={2}>
           <Typography variant="h5" fontWeight="600">
             {name}
           </Typography>
@@ -62,9 +64,15 @@ export default function DetailProduct(props) {
               sx={{ borderBottom: "2px solid #f3f3f3", padding: "10px" }}
             >
               <Typography variant="h6">Price</Typography>
-              <Typography variant="h6" fontWeight="600">
+             {/* <Stack direction='row'>
+              <Typography variant="h6" component='span' fontWeight="600">
+                {price/10} $
+              </Typography>
+             <Typography variant="h6" fontWeight="600">
                 {price} $
               </Typography>
+             </Stack> */}
+             <PriceSell isSell={isSell} price={price}/>
             </Stack>
             <Stack
               direction="row"
@@ -72,7 +80,9 @@ export default function DetailProduct(props) {
               sx={{ borderBottom: "2px solid #f3f3f3", padding: "10px" }}
             >
               <Typography variant="h6">Review</Typography>
-              <Rating name="read-only" value={parseInt(rating)} readOnly />
+              <Stack direction='row'><Rating name="read-only" value={parseInt(rating)} readOnly />
+              <Typography variant="body2" component='span'>(30)</Typography></Stack>
+
             </Stack>
             <Button
               onClick={() => dispatch(fetchAddToCartRequest(item))}
@@ -96,7 +106,7 @@ export default function DetailProduct(props) {
               />
               <Typography variant="h5">Comment</Typography>
               <TextField
-                {...register("comment")}
+                {...register("comment",{maxLength : 100})}
                 id="outlined-basic"
                 label="Write Commet Here ..."
                 variant="outlined"
@@ -112,6 +122,7 @@ export default function DetailProduct(props) {
               </Button>
             </Stack>
           </form>
+          { errors.comment && errors.comment.type === "maxLength" && <Alert severity="error">Không được quá 100 kí tự</Alert>}
         </Stack>
       </Stack>
       <Stack sx={{ marginTop: "50px" }}>

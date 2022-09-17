@@ -16,7 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import FacebookLogin from "react-facebook-login";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
-
+import FacebookIcon from '@mui/icons-material/Facebook';
 export default function Login() {
   const [display, setDisplay] = useState(false);
   const [reRender, setReRender] = useState(false);
@@ -39,7 +39,7 @@ export default function Login() {
   useEffect(() => {
     if (statusLogin) {
       navigate("/");
-      localStorage.setItem("user", JSON.stringify(loginSuccess));
+      localStorage.setItem("userShopUt", JSON.stringify(loginSuccess));
     }
   }, [reRender]);
   const navigate = useNavigate();
@@ -146,7 +146,7 @@ export default function Login() {
             appId="3267114616941933"
             fields="name,email,picture"
             callback={responseFacebook}
-            icon="fa-facebook"
+            icon={<FacebookIcon/>}
           />
           <GoogleLogin
             clientId="102456725904-0gb4rrpp4337idg21co7gar7a72mk5ll.apps.googleusercontent.com"

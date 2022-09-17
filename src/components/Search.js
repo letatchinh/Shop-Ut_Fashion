@@ -44,11 +44,13 @@ export default function Search() {
                 price={e.price}
                 isSell={e.isSell}
                 id={e.id}
+                listRating={e.listRating}
+                rating={e.rating}
               />
             </Grid>
           ))}
       </Grid>
-      <Stack spacing={2}>
+      <Stack spacing={2} alignItems='center'>
         <Pagination count={count} page={page} onChange={handleChange} />
       </Stack>
     </Container>

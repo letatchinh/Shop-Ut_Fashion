@@ -18,6 +18,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import PinterestIcon from '@mui/icons-material/Pinterest';
+import { KEY_USER } from "../../constant/LocalStored";
 export default function Index() {
   const [user,setUser] = useState({})
   const [displayCart,setDisplayCart] = useState(false)
@@ -33,20 +34,20 @@ export default function Index() {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('userShopUt'))
+    if(localStorage.getItem(KEY_USER))
   {
-    const item = JSON.parse(localStorage.getItem('userShopUt'));
+    const item = JSON.parse(localStorage.getItem(KEY_USER));
     setUser(item)
     dispatch({type : IS_STATUS_LOGIN ,dispatch : ""})
   }
-  },[localStorage.getItem('userShopUt')])
+  },[localStorage.getItem(KEY_USER)])
   const handleClose = () => {
     setAnchorEl(null);
 
   };
   const handleLogout = () => {
     dispatch(fectchLogout())
-    localStorage.removeItem('userShopUt')
+    localStorage.removeItem(KEY_USER)
     navigate('/')
     
   }
@@ -121,7 +122,9 @@ export default function Index() {
       >
        <div style={{display : (statusLogin) ? "block" : "none"}}> 
         <MenuItem onClick={handleClose}>{user.username}</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+       <Link to='profile_Info'>
+       <MenuItem onClick={handleClose}>My account</MenuItem>
+       </Link>
         <MenuItem  onClick={() => {handleLogout() ; handleClose()}}><LogoutIcon/>Logout</MenuItem>
         </div>
        <div style={{display : (!statusLogin) ? "block" : "none"}}> 

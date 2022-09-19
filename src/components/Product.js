@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { fetchAddToCartRequest } from '../redux/login/Actions';
 import Rating from '@mui/material/Rating';
 import './StyleComponent/Product.css'
+import PriceSell from './PriceSell';
 export default function Product(props) {
   const {name , image , price , isSell , item ,rating , listRating} = props
   const dispatch = useDispatch()
@@ -25,12 +26,7 @@ export default function Product(props) {
         <Typography  gutterBottom variant="body1"   >
           {name}
         </Typography>
-        <span style={{opacity : (isSell === 'true') ? "1" : "0" ,  color : (isSell) ?  "orange" : "#C4C4C4" , fontSize : '20px'}}>
-        {price * 9 / 10} Đ
-        </span>
-        <span style={{textDecoration : (isSell === 'true') ? "line-through" : "none" , color : (isSell === 'false') ?  "orange" : "#C4C4C4" , fontSize : (isSell === 'false') ? '20px' : '12px'} }>
-          {price} Đ
-        </span>
+        <PriceSell price={price} isSell={isSell}/>
       </CardContent>
      <CardContent sx={{padding : '5px'}} >
      <Rating name="read-only" value={parseInt(rating)} readOnly size="small"/>

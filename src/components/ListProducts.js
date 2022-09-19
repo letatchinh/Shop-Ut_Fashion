@@ -32,9 +32,7 @@ export default function ListProducts() {
   }, [listProduct]);
   const handleChange = (event, value) => {
     setPage(value);
-    const newStart = (value - 1) * limit;
   };
-  console.log(loading);
   return (
     <>
       <Container>

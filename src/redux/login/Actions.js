@@ -1,5 +1,6 @@
 
 import { userApi } from '../../apis/usersApi'
+import { KEY_USER } from '../../constant/LocalStored'
 import * as TYPES from './Types'
 
 export const changeText = (type,payload) => {
@@ -42,7 +43,7 @@ export const fetchLogginSuccessRequest = () => {
     return (dispatch) => {
         ( async() => {
             try {
-                const res = await JSON.parse(localStorage.getItem('user'))
+                const res = await JSON.parse(localStorage.getItem(KEY_USER))
                 dispatch(fecthLogginSuccess(res))
             } catch (error) {
                 console.log(error);
@@ -54,9 +55,9 @@ export const fetchAddToCartRequest = (item) => {
     return (dispatch) => {
         ( async() => {
             try {   
-                const list = JSON.parse(localStorage.getItem('user'))
+                const list = JSON.parse(localStorage.getItem(KEY_USER))
                const newList = {...list , listCarts : [...list.listCarts,{...item,id : list.listCarts.length , quanlity : 1}]}
-                localStorage.setItem('user',JSON.stringify(newList));
+                localStorage.setItem(KEY_USER,JSON.stringify(newList));
                 dispatch(fecthAddToCart(newList))
                 userApi.editUser(newList,list.id)
             } catch (error) {
@@ -69,9 +70,9 @@ export const featchRemoveItemCartRequest = (item) => {
     return (dispatch) => {
         (async ()=>{
             try {
-                const list = JSON.parse(localStorage.getItem('user'))
+                const list = JSON.parse(localStorage.getItem(KEY_USER))
                 list.listCarts = list.listCarts.filter(e => e.id !== item.id)
-                localStorage.setItem('user',JSON.stringify(list));
+                localStorage.setItem(KEY_USER,JSON.stringify(list));
                 dispatch(fecthRemoveItemCart(list))
                 userApi.editUser(list,list.id)
             } catch (error) {
@@ -84,14 +85,14 @@ export const featchIncreaseItemRequest = (item) => {
     return (dispatch) => {
         (async () => {
             try {
-                const list = JSON.parse(localStorage.getItem('user'))
+                const list = JSON.parse(localStorage.getItem(KEY_USER))
                 list.listCarts.map(e => {
                     if(e.id === item.id){
                         e.quanlity++;
                     }
                     return e
                 })
-                localStorage.setItem('user',JSON.stringify(list))
+                localStorage.setItem(KEY_USER,JSON.stringify(list))
                 dispatch(fecthIncreaseItemCart(list))
                 userApi.editUser(list,list.id)
             } catch (error) {
@@ -110,14 +111,14 @@ export const featchDecreaseItemRequest = (item) => {
     return (dispatch) => {
         (async () => {
             try {
-                const list = JSON.parse(localStorage.getItem('user'))
+                const list = JSON.parse(localStorage.getItem(KEY_USER))
                 list.listCarts.map(e => {
                     if(e.id === item.id){
                         e.quanlity--;
                     }
                     return e
                 })
-                localStorage.setItem('user',JSON.stringify(list))
+                localStorage.setItem(KEY_USER,JSON.stringify(list))
                 dispatch(fecthDecreaseItemCart(list))
                 userApi.editUser(list,list.id)
             } catch (error) {

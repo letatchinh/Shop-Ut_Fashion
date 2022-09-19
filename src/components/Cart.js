@@ -20,6 +20,7 @@ import {
 } from "../redux/login/Actions";
 import { Stack } from "@mui/system";
 import styled from "styled-components";
+import { KEY_USER } from "../constant/LocalStored";
 const SpanStylePrice = styled.span`
 margin : 0 10px;
 font-family: Montserrat, sans-serif;
@@ -31,12 +32,12 @@ font-size : 18px
   const cartUser = useSelector((state) => state.user.loginSuccess.listCarts);
   const totalBill = useSelector((state) => state.user.totalBill);
   const fetch = useCallback(() => {
-    if (localStorage.getItem("user")) {
+    if (localStorage.getItem(KEY_USER)) {
       dispatch(fetchLogginSuccessRequest());
       
     }
     dispatch(calTotalBill(cartUser))
-  }, [localStorage.getItem("user")]);
+  }, [localStorage.getItem(KEY_USER)]);
   useEffect(() => {
     fetch();
   }, [fetch]);

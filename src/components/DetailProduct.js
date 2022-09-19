@@ -1,6 +1,6 @@
 import { Alert, Button, TextField, Typography } from "@mui/material";
 import { Container, Stack } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAddToCartRequest } from "../redux/login/Actions";
@@ -10,10 +10,21 @@ import Rating from "@mui/material/Rating";
 import ListReview from "./ListReview";
 import { fetchAddRatingProductRequest } from "../redux/shopping/Shopping-actions";
 import PriceSell from "./PriceSell";
+import axios from "axios";
+import { URL_BASE } from "../constant/UrlConstant";
+
 export default function DetailProduct(props) {
   const { name, image, price, isSell, item, rating, id, listRating } = props;
   const [value, setValue] = useState(null);
-  const username = useSelector(state => state.user.loginSuccess.username);
+  const [isPayment,setIsPayment] = useState(false)
+  const username = useSelector(state => state.user.loginSuccess);
+  useEffect(()=>{
+    axios.get(`${URL_BASE}listPayment?idUser=${username.id}&idProduct=${id}`).then(res => {
+      if(res.data.length !== 0){
+        setIsPayment(true)
+      }
+    }).catch(err => console.log(err))
+  },[])
   const dispatch = useDispatch();
   const {
     register,
@@ -64,14 +75,6 @@ export default function DetailProduct(props) {
               sx={{ borderBottom: "2px solid #f3f3f3", padding: "10px" }}
             >
               <Typography variant="h6">Price</Typography>
-             {/* <Stack direction='row'>
-              <Typography variant="h6" component='span' fontWeight="600">
-                {price/10} $
-              </Typography>
-             <Typography variant="h6" fontWeight="600">
-                {price} $
-              </Typography>
-             </Stack> */}
              <PriceSell isSell={isSell} price={price}/>
             </Stack>
             <Stack
@@ -81,7 +84,9 @@ export default function DetailProduct(props) {
             >
               <Typography variant="h6">Review</Typography>
               <Stack direction='row'><Rating name="read-only" value={parseInt(rating)} readOnly />
-              <Typography variant="body2" component='span'>(30)</Typography></Stack>
+              
+           <a href="#review"> <Typography variant="body2" component='span'>({listRating.length})</Typography></a>
+              </Stack>
 
             </Stack>
             <Button
@@ -112,7 +117,7 @@ export default function DetailProduct(props) {
                 variant="outlined"
               />
               <Button
-                disabled={value === null}
+                disabled={(value === null) || !isPayment}
                 type="submit"
                 sx={{ width: "40%", marginLeft: "auto!important" }}
                 variant="contained"
@@ -123,10 +128,11 @@ export default function DetailProduct(props) {
             </Stack>
           </form>
           { errors.comment && errors.comment.type === "maxLength" && <Alert severity="error">Không được quá 100 kí tự</Alert>}
+          { !isPayment && <Alert severity="error">Chưa mua mà đòi Rating</Alert>}
         </Stack>
       </Stack>
       <Stack sx={{ marginTop: "50px" }}>
-        <Typography variant="h5">Review</Typography>
+        <Typography id='review'  variant="h5">Review</Typography>
         <ListReview data={item.listRating} />
       </Stack>
     </Container>

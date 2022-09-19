@@ -11,6 +11,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fecthProductRequest } from './redux/shopping/Shopping-actions';
 import { v4 } from 'uuid';
 import DetailProduct from './components/DetailProduct';
+import ProfileUser from './components/ProfileUser';
+import InfoUser from './components/InfoUser';
+import ListPaymentUser from './components/ListPaymentUser';
 function App() {
   const dispatch = useDispatch();
   const fetch = useCallback(async() => {
@@ -38,6 +41,9 @@ function App() {
                     listRating={e.listRating}
                     rating={e.rating}
                   />}/>)}
+      <Route path='profile_Info' element={<ProfileUser children={<InfoUser/>}/>}/>
+      <Route path='profile_ListPayment' element={<ProfileUser children={<ListPaymentUser/>}/>}/>
+     
      </Routes>
    </>
   );
